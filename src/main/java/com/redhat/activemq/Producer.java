@@ -12,8 +12,8 @@ public class Producer {
 
     private static final Logger LOG = LoggerFactory.getLogger(Producer.class);
 
-    @Value("${queue.name}")
-    private String queueName;
+    @Value("${destination.name}")
+    private String destinationName;
 
     @Autowired
     public JmsTemplate jmsTemplate;
@@ -21,7 +21,7 @@ public class Producer {
     public void sendMessage(String payload) {
 
         try {
-            this.jmsTemplate.convertAndSend(queueName, payload);
+            this.jmsTemplate.convertAndSend(destinationName, payload);
         } catch (Throwable t) {
             LOG.error(t.getMessage(), t);
         }
